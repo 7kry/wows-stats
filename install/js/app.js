@@ -6,27 +6,27 @@ app.controller('InstallCtrl', function ($scope, $http) {
 	$scope.api.region = [
 		{
 			name: "Russia",
-			url: "http://api.worldofwarships.ru",
+			url: "https://api.worldofwarships.ru",
 			devRoom: "http://ru.wargaming.net/developers/"
 		},
 		{
 			name: "North America",
-			url: "http://api.worldofwarships.com",
+			url: "https://api.worldofwarships.com",
 			devRoom: "http://na.wargaming.net/developers/"
 		},
 		{
 			name: "Europe",
-			url: "http://api.worldofwarships.eu",
+			url: "https://api.worldofwarships.eu",
 			devRoom: "http://eu.wargaming.net/developers/"
 		},
 		{
 			name: "Asia",
-			url: "http://api.worldofwarships.asia",
+			url: "https://api.worldofwarships.asia",
 			devRoom: "http://asia.wargaming.net/developers/"
 		},
 		{
 			name: "Korea",
-			url: "http://api.worldofwarships.kr",
+			url: "https://api.worldofwarships.kr",
 			devRoom: "http://kr.wargaming.net/developers/"
 		}
 	];

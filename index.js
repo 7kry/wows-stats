@@ -47,6 +47,7 @@ router.get('/player', jsonParser, function(req, res) {
 						if (playerJson) {
 							player.id = playerJson.account_id.toString();
 							player.name = playerJson.nickname;
+							player.realmhost = process.env.WOWS_API_URL.replace('//api.', '');
 							request(process.env.WOWS_API_URL + '/wows/account/info/?application_id=' + api_key + '&account_id=' + player.id, function (err, rep, statsBody) {
 								if (!err && rep.statusCode == 200) {
 									var stats = JSON.parse(statsBody);
@@ -160,26 +161,22 @@ router.get('/ship', jsonParser, function(req, res) {
 
 // arena api
 router.get('/arena', jsonParser, function(req, res) {
-	if (process.platform == 'win32') {
-		arenaJson = process.env.WOWS_PATH + '/replays/tempArenaInfo.json';
-		fs.access(arenaJson, fs.R_OK, function (err) {
-			if (!err) {
-				jsonfile.readFile(arenaJson, function read(error, obj) {
-				    if (!error) {
-				    	res.json(obj);
-				    }
-				    else {
-				    	res.sendStatus(404);
-				    }
-				});
-			}
-			else {
-				res.sendStatus(404);
-			}
-		});
-	}
-	else
-		res.sendStatus(400);
+	arenaJson = process.env.WOWS_PATH + '/replays/tempArenaInfo.json';
+	fs.access(arenaJson, fs.R_OK, function (err) {
+		if (!err) {
+			jsonfile.readFile(arenaJson, function read(error, obj) {
+				if (!error) {
+					res.json(obj);
+				}
+				else {
+					res.sendStatus(404);
+				}
+			});
+		}
+		else {
+			res.sendStatus(404);
+		}
+	});
 });
 
 app.listen(port);
